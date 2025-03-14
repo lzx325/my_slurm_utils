@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sacct -X -ojobid,state|awk '$2~/^COMPLETED$/||$2~/^FAILED$/{print $1}'|tail -1

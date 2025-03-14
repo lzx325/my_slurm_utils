@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -e
+cmd="${1}"
+if [ -z "$cmd" ];then echo "error: empty command" 1>&2; exit 1; fi
+time="${2:-02}"
+n_cpus="${3:-16}"
+memory="${4:-200}"
+gpu="${5:-0}"
+mkdir -p "slurm"
+if [ "$gpu" -gt 0 ]; then
+	sbatch <<- EOF
+		#!/bin/bash
+		#SBATCH -N 1
+		#SBATCH --partition=batch
+		#SBATCH -o slurm/%J.out
+		#SBATCH -e slurm/%J.err
+		#SBATCH --time=${time}:00:00
+		#SBATCH --mem=${memory}G
+		#SBATCH --cpus-per-task=${n_cpus}
+		#SBATCH --gres=gpu:${gpu}
+		#run the application:
+		${cmd}
+	EOF
+
+else
+	sbatch <<- EOF
+		#!/bin/bash
+		#SBATCH -N 1
+		#SBATCH --partition=batch
+		#SBATCH -o slurm/%J.out
+		#SBATCH -e slurm/%J.err
+		#SBATCH --time=${time}:00:00
+		#SBATCH --mem=${memory}G
+		#SBATCH --cpus-per-task=${n_cpus}
+		#run the application:
+		${cmd}
+	EOF
+fi
+

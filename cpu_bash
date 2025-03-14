@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+cmd=(srun  --nodes=1 --ntasks=1 --cpus-per-task=32)
+if [ ! -z "$1" ]; then cmd+=("--time=${1}"); fi
+if [ ! -z "$2" ]; then cmd+=("--partition=${2}");fi
+cmd+=("--mem=${3:-100}G")
+cmd+=("--pty" "bash")
+"${cmd[@]}"
