@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-sinfo -o "%R %N %t %b" |grep gpu|grep -v nogpu

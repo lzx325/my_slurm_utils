@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+gpu_alloc "$1" "$2" 0 "$3" "$4"

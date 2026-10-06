@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-cmd=(srun  --nodes=1 --ntasks=1 --cpus-per-task=32)
-if [ ! -z "$1" ]; then cmd+=("--gres=gpu:${1}"); fi 
-if [ ! -z "$2" ]; then cmd+=("--time=${2}"); fi
-if [ ! -z "$3" ]; then cmd+=("--partition=${3}");fi
-if [ ! -z "$4" ]; then cmd+=("--constraint=${4}"); fi
-cmd+=("--mem=${5:-150}G")
-cmd+=("--pty" "bash")
-"${cmd[@]}"

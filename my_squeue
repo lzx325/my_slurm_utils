@@ -1,1 +1,0 @@
-squeue --Format="jobid:10,partition:20,name:20,username:10,state:10,timeused:10,numnodes:6,nodelist:30" -u "$USER" "$@"

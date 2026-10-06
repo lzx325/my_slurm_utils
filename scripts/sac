@@ -1,7 +1,10 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 h1="$1"
 h2="${2:-0}"
 datebefore="$(date +"%Y-%m-%d-%H:%M" --date="${h1} hours ago")"
 dateend="$(date +"%Y-%m-%d-%H:%M" --date="${h2} hours ago")" 
 echo "jobs from $datebefore to $dateend:"
-sacct -X -ojobid,jobname,start,end,state,NTasks,ReqCPUS,ReqMem,MaxRSS,Timelimit,NodeList,Partition -S "$datebefore" -E "$dateend"
+sacct -X \
+    -ojobid,jobname,start,end,state,NTasks,ReqCPUS,ReqMem,MaxRSS,Timelimit,NodeList,Partition \
+    -S "$datebefore" \
+    -E "$dateend"

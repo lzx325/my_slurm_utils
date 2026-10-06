@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-jobid="$1"
-if [ -z "$jobid" ]; then
-    jobid="$(last_slurm_jobid)"
-fi
-sacct -X -ojobid,jobname,start,end,state,ReqCPUS,ReqMem,MaxRSS,Timelimit,NodeList -j "$jobid"
-vim slurm/"${jobid}.out" slurm/"${jobid}.err" -c "tab all"

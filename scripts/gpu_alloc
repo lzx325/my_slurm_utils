@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+partition="$1"
+shift
+
+if [ "$partition" = batch ]; then
+cmd=(salloc --account marlowe-m000071-pm06 --partition batch)
+elif [ "$partition" = preempt ]; then
+cmd=(salloc --account marlowe-m000071 --partition preempt)
+else
+echo "Invalid partition: $partition" >&2; exit 1;
+fi
+
+if [ ! -z "$1" ]; then cmd+=("--nodes=$1" "--ntasks=$1" --cpus-per-task=16); fi
+if [ ! -z "$2" ]; then cmd+=("--gpus-per-node=${2}"); fi
+if [ ! -z "$3" ]; then cmd+=("--time=${3}:00:00"); fi
+cmd+=("--mem=${4:-150}G")
+echo "${cmd[@]}"
+"${cmd[@]}"

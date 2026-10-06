@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+jobid="$1"
+if [ -z "$jobid" ]; then
+    jobid="$(last_slurm_jobid)"
+fi
+out_file=slurm/"${jobid}.out"
+err_file=slurm/"${jobid}.err"
+if [ -f "$out_file" ] && [ -f "$err_file" ]; then
+        vim "${out_file}" "${err_file}" -c "tab all"
+        exit 0;
+fi
+
+out_file=work_dirs/submit/slurm_"${jobid}.out"
+err_file=work_dirs/submit/slurm_"${jobid}.err"
+if [ -f "$out_file" ] && [ -f "$err_file" ]; then
+        vim "${out_file}" "${err_file}" -c "tab all"
+        exit 0;
+fi
+
+out_file=work_dirs/submit/infer_"${jobid}.out"
+err_file=work_dirs/submit/infer_"${jobid}.err"
+if [ -f "$out_file" ] && [ -f "$err_file" ]; then
+        vim "${out_file}" "${err_file}" -c "tab all"
+        exit 0;
+fi

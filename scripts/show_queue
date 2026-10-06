@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+squeue \
+    --Format="jobid:18,partition:13,name:20,username:8,statecompact:2,timeused:10,numnodes:6,nodelist:30,reasonlist:17,prioritylong:10,submittime:20,starttime:20,endtime:20" \
+    --sort "t,S,-p" \
+    -u ${USER}

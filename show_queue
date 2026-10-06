@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-squeue -o "%.18i %.13P %.20j %.8u %.2t %.10M %.6D %.17R %.10Q %.20f %.20V %.20S %.20e" --sort "t,S,-p" -u ${USER}|less
